@@ -24,19 +24,19 @@ call plug#end()
 
 " Basic configuration
 set encoding=utf-8
-set number						" show line number
-set relativenumber				" show relative number
-set linespace=12				" set line space
-set title						" set title
-set tabstop=4					" set tabstop 4 space
-set shiftwidth=4  				" set shift width
-set showmode                    " always show what mode we're currently editing in
-set nowrap                      " don't wrap lines
-set autoindent 					" set auto indent
-set cindent						" ciindent
-set nocompatible                " be iMproved, required
-set mouse=a						" enable mouse
-filetype off                    " required
+set number				" show line number
+set relativenumber		" show relative number
+set linespace=12		" set line space
+set title				" set title
+set tabstop=4			" set tabstop 4 space
+set shiftwidth=4		" set shift width
+set showmode			" always show what mode we're currently editing in
+set nowrap				" don't wrap lines
+set autoindent			" set auto indent
+set cindent				" ciindent
+set nocompatible		" be iMproved, required
+set mouse=a				" enable mouse
+filetype off			" required
 syntax enable
 colorscheme gruvbox
 
@@ -47,10 +47,6 @@ let g:mapleader = ","
 
 " Fast saves
 nmap <leader>w :w!<cr>
-
-" Auto save
-let g:auto_save = 0
-let g:auto_save_silent = 1
 
 " Down is really the next line
 nnoremap j gj
