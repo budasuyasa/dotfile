@@ -9,7 +9,6 @@ My .vimrc configurations. Mostly use vim for PHP (Laravel) Project. Yeah this mo
 ```
 " Plugins VimPlug
 call plug#begin('~/.vim/plugged')
-
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/emmet-vim'
@@ -28,7 +27,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'jwalton512/vim-blade'
 Plug 'morhetz/gruvbox'
-
 call plug#end()
 
 " Basic configuration
@@ -36,15 +34,16 @@ set encoding=utf-8
 set number						" show line number
 set relativenumber				" show relative number
 set linespace=12				" set line space
-set title						" set title
+set title					
 set tabstop=4					" set tabstop 4 space
 set shiftwidth=4  				" set shift width
 set showmode                    " always show what mode we're currently editing in
-set nowrap                      " don't wrap lines
+set nowrap                      
 set autoindent 					" set auto indent
+set smartindent					
 set cindent						" ciindent
 set nocompatible                " be iMproved, required
-set mouse=a						" enable mouse
+set mouse=a
 filetype off                    " required
 syntax enable
 colorscheme gruvbox
@@ -56,10 +55,6 @@ let g:mapleader = ","
 
 " Fast saves
 nmap <leader>w :w!<cr>
-
-" Auto save
-let g:auto_save = 0
-let g:auto_save_silent = 1
 
 " Down is really the next line
 nnoremap j gj
@@ -88,13 +83,21 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " Use autocomplete close
+inoremap " ""<left>
+inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-" Tagbar shortcut
 nmap <F8> :TagbarToggle<CR>
+
+" coc completion configuration
+" use tab and shift tab to navigate over completion
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" use enter to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 ```
