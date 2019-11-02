@@ -3,21 +3,22 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug '907th/vim-auto-save'
 Plug 'ryanoasis/vim-devicons'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-dadbod'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'jwalton512/vim-blade'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -35,7 +36,12 @@ set nowrap                      " don't wrap lines
 set autoindent 					" set auto indent
 set cindent						" ciindent
 set nocompatible                " be iMproved, required
+set mouse=a
 filetype off                    " required
+syntax enable
+
+colorscheme gruvbox
+
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -46,7 +52,7 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 " Auto save
-let g:auto_save = 1
+let g:auto_save = 0
 let g:auto_save_silent = 1
 
 " Down is really the next line
@@ -64,7 +70,6 @@ nmap sp :split<cr>
 map <S-Right> :tabn<CR>
 map <S-Left>  :tabp<CR>
 
-syntax enable
 
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
