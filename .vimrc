@@ -22,7 +22,6 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-
 " Basic configuration
 set encoding=utf-8
 set number						" show line number
@@ -36,12 +35,10 @@ set nowrap                      " don't wrap lines
 set autoindent 					" set auto indent
 set cindent						" ciindent
 set nocompatible                " be iMproved, required
-set mouse=a
+set mouse=a						" enable mouse
 filetype off                    " required
 syntax enable
-
 colorscheme gruvbox
-
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -70,7 +67,6 @@ nmap sp :split<cr>
 map <S-Right> :tabn<CR>
 map <S-Left>  :tabp<CR>
 
-
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
@@ -89,17 +85,6 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-execute pathogen#infect()
-
+" Tagbar shortcut
 nmap <F8> :TagbarToggle<CR>
 
-" Ctrl P Config
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-" Ignore some folders and files for CtrlP indexing
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|vendor\|public\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
-  \ }
