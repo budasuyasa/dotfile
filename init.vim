@@ -12,12 +12,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
 Plug 'morhetz/gruvbox'
 Plug 'yggdroot/indentline'
-Plug 'ryanoasis/vim-devicons'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
 " Basic configuration
 set encoding=utf-8
+set hidden						" set hidden buffer
 set number						" show line number
 set relativenumber				" show relative number
 set linespace=12				" set line space
@@ -55,8 +56,8 @@ nmap vs :vsplit<cr>
 nmap sp :split<cr>
 
 " Tab switcher NerdTree
-map <S-Right> :tabn<CR>
-map <S-Left>  :tabp<CR>
+map <S-Right> :bnext<CR>
+map <S-Left>  :bprevious<CR>
 
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
@@ -69,15 +70,6 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Use autocomplete close
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-
 nmap <F8> :TagbarToggle<CR>
 
 " coc completion configuration
@@ -87,3 +79,5 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " use enter to confirm completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" show buffer 
+let g:airline#extensions#tabline#enabled = 1
