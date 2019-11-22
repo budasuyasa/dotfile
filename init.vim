@@ -10,6 +10,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
 Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
 Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
@@ -17,7 +18,11 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'alvan/vim-closetag'
 Plug 'liuchengxu/vista.vim'
 Plug 'mhinz/vim-startify'
+Plug '907th/vim-auto-save'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
+Plug 'altercation/vim-colors-solarized'
+
 
 call plug#end()
 
@@ -31,22 +36,28 @@ set title
 set tabstop=4					" set tabstop 4 space
 set shiftwidth=4  				" set shift width
 set nobackup
+set ignorecase
+set smartcase
+set nowrap
 set nowritebackup
 set updatetime=300
+set nobackup
+set noswapfile
 set showmode                    " always show what mode we're currently editing in
-set nowrap
 set autoindent 					" set auto indent
 set smartindent
 set nocompatible                " be iMproved, required
 filetype off                    " required
 syntax enable
 colorscheme gruvbox
+set background=dark
 set mouse=a
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
 
+let g:auto_save = 1  " enable AutoSave on Vim startup
 " Fast saves
 nmap <leader>w :w!<cr>
 nmap <leader>t :tabnew<cr>
@@ -54,6 +65,7 @@ nmap <leader>t :tabnew<cr>
 " Down is really the next line
 nnoremap j gj
 nnoremap k gk
+nnoremap J <Nop>
 
 "Easy escaping to normal model
 imap qq <esc>
@@ -65,6 +77,9 @@ nmap sp :split<cr>
 " Tab switcher NerdTree
 map <S-Right> :bnext<CR>
 map <S-Left>  :bprevious<CR>
+map <S-l> :bnext<CR>
+map <S-h>  :bprevious<CR>
+
 
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
@@ -78,6 +93,7 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 nmap <F8> :Vista!!<CR>
+nmap <F7> :Vista finder coc<CR>
 
 " coc completion configuration
 " Remap keys for gotos
@@ -108,6 +124,9 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = "hard"
+
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
 
@@ -126,8 +145,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " Executive used when opening vista sidebar without specifying it.
 " See all the avaliable executives via `:echo g:vista#executives`.
-let g:vista_default_executive = 'coc'
-
+let g:vista_default_executive = 'ctags'
 
 " To enable fzf's preview window set g:vista_fzf_preview.
 " The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
@@ -141,4 +159,12 @@ let g:vista#renderer#icons = {
 \   "function": "\uf794",
 \   "variable": "\uf71b",
 \  }
+
+" Make it so that a curly brace automatically inserts an indented line
+inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
+
+" Vim One themes
+" let g:airline_theme='one'
+" let g:one_allow_italics = 1 " I love italic for comments
+
 
