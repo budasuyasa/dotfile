@@ -11,7 +11,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
 Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
-Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'yuttie/comfortable-motion.vim'
@@ -22,7 +21,8 @@ Plug '907th/vim-auto-save'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
 Plug 'altercation/vim-colors-solarized'
-
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'qpkorr/vim-bufkill'
 
 call plug#end()
 
@@ -49,8 +49,10 @@ set smartindent
 set nocompatible                " be iMproved, required
 filetype off                    " required
 syntax enable
-colorscheme gruvbox
 set background=dark
+colorscheme PaperColor
+hi Normal guibg=NONE ctermbg=NONE
+
 set mouse=a
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -129,8 +131,6 @@ let g:gruvbox_contrast_dark = "hard"
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
-
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
