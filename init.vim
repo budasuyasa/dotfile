@@ -22,7 +22,12 @@ Plug '907th/vim-auto-save'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
 Plug 'altercation/vim-colors-solarized'
-
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdcommenter'
+Plug 'qpkorr/vim-bufkill'
+Plug 'tpope/vim-projectionist'
+Plug 'noahfrederick/vim-laravel'
 
 call plug#end()
 
@@ -48,9 +53,10 @@ set autoindent 					" set auto indent
 set smartindent
 set nocompatible                " be iMproved, required
 filetype off                    " required
+filetype plugin on
 syntax enable
-colorscheme gruvbox
 set background=dark
+colorscheme PaperColor
 set mouse=a
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -121,6 +127,10 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+let g:coc_filetype_map = {
+  \ 'blade': 'html',
+  \ }
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -129,6 +139,7 @@ let g:gruvbox_contrast_dark = "hard"
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='gruvbox'
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
