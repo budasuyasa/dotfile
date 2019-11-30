@@ -11,7 +11,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jwalton512/vim-blade'
 Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
-Plug 'yggdroot/indentline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'yuttie/comfortable-motion.vim'
@@ -28,6 +27,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-laravel'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -56,7 +57,7 @@ filetype off                    " required
 filetype plugin on
 syntax enable
 set background=dark
-colorscheme PaperColor
+colorscheme gruvbox
 set mouse=a
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -74,7 +75,7 @@ nnoremap k gk
 nnoremap J <Nop>
 
 "Easy escaping to normal model
-imap qq <esc>
+imap jj <esc>
 
 " Open splits
 nmap vs :vsplit<cr>
@@ -141,8 +142,6 @@ let g:gruvbox_contrast_dark = "hard"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='gruvbox'
 
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 
@@ -178,4 +177,4 @@ inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 " let g:airline_theme='one'
 " let g:one_allow_italics = 1 " I love italic for comments
 
-
+let g:indent_guides_enable_on_vim_startup = 1
