@@ -57,9 +57,8 @@ set nocompatible                " be iMproved, required
 filetype off                    " required
 filetype plugin on
 syntax enable
-set background=dark
-colorscheme gruvbox
 set mouse=a
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -88,7 +87,6 @@ map <S-Left>  :bprevious<CR>
 map <S-l> :bnext<CR>
 map <S-h>  :bprevious<CR>
 
-
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
@@ -100,6 +98,15 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" Colorscheme configuration
+let g:gruvbox_italic = 1
+let g:gruvbox_underline = 1
+let g:gruvbox_undercurl = 1
+let g:gruvbox_contrast_dark = "soft"
+set background=dark
+colorscheme gruvbox
+
+" Plugin specific
 nmap <F8> :Vista!!<CR>
 nmap <F7> :Vista finder coc<CR>
 
@@ -136,16 +143,12 @@ let g:coc_filetype_map = {
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = "hard"
-
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='gruvbox'
 
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
-
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
 " How each level is indented and what to prepend.
