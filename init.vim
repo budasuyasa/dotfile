@@ -1,35 +1,51 @@
 call plug#begin('~/.config/nvim/plugged')
+
+" Essential
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jwalton512/vim-blade'
-Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
 Plug 'jiangmiao/auto-pairs'
-Plug 'sheerun/vim-polyglot'
-Plug 'yuttie/comfortable-motion.vim'
 Plug 'alvan/vim-closetag'
-Plug 'liuchengxu/vista.vim'
-Plug 'mhinz/vim-startify'
 Plug '907th/vim-auto-save'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'ryanoasis/vim-devicons'
-Plug 'altercation/vim-colors-solarized'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
+Plug 'yggdroot/indentline'
 Plug 'qpkorr/vim-bufkill'
+Plug 'tpope/vim-dadbod'
+
+" Advance IDE
+" Plug 'liuchengxu/vista.vim'
+Plug 'dense-analysis/ale'
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'StanAngeloff/php.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Laravel related
+Plug 'jwalton512/vim-blade'
 Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-laravel'
-Plug 'nathanaelkane/vim-indent-guides'
+
+" Colorscheme 
+Plug 'sheerun/vim-polyglot' " must enable
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'chriskempson/tomorrow-theme'
+
+" Deprecated
+"Plug 'mhinz/vim-startify'
+"Plug 'yuttie/comfortable-motion.vim'
 
 call plug#end()
 
@@ -98,17 +114,15 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+nmap <C-x> :BD<CR>
+
 " Colorscheme configuration
 let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_undercurl = 1
 let g:gruvbox_contrast_dark = "soft"
-set background=dark
-colorscheme gruvbox
-
-" Plugin specific
-nmap <F8> :Vista!!<CR>
-nmap <F7> :Vista finder coc<CR>
+set background=light
+colorscheme solarized
 
 " coc completion configuration
 " Remap keys for gotos
@@ -136,6 +150,24 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 let g:coc_filetype_map = {
   \ 'blade': 'html',
   \ }
@@ -145,34 +177,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='solarized'
 
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
-
-" How each level is indented and what to prepend.
-" This could make the display more compact or more spacious.
-" e.g., more compact: ["▸ ", ""]
-" Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-
-" Executive used when opening vista sidebar without specifying it.
-" See all the avaliable executives via `:echo g:vista#executives`.
-let g:vista_default_executive = 'coc'
-
-" To enable fzf's preview window set g:vista_fzf_preview.
-" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
-" For example:
-let g:vista_fzf_preview = ['right:50%']
-" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-let g:vista#renderer#enable_icon = 1
-
-" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
 
 " Make it so that a curly brace automatically inserts an indented line
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
@@ -181,4 +188,17 @@ inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 " let g:airline_theme='one'
 " let g:one_allow_italics = 1 " I love italic for comments
 
-let g:indent_guides_enable_on_vim_startup = 1
+" Deprecated
+"let g:comfortable_motion_scroll_down_key = "j"
+"let g:comfortable_motion_scroll_up_key = "k"
+
+" Indentline
+let g:indentLine_enabled = 1
+
+" One dark themes settings
+let g:onedark_terminal_italics = 1
+
+nmap <F7> :TagbarToggle<CR>
+
+" automatic resize vertical split when focus
+let &winwidth = &columns * 7 / 10
