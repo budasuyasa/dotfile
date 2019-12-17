@@ -12,12 +12,15 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug '907th/vim-auto-save'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
 Plug 'yggdroot/indentline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-dadbod'
+Plug 'terryma/vim-smooth-scroll'
 
 " Advance IDE
 " Plug 'liuchengxu/vista.vim'
@@ -33,7 +36,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-laravel'
 
 " Colorscheme 
-Plug 'sheerun/vim-polyglot' " must enable
+"Plug 'sheerun/vim-polyglot' " must enable
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
@@ -42,6 +45,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'chriskempson/tomorrow-theme'
+
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Deprecated
 "Plug 'mhinz/vim-startify'
@@ -74,6 +80,7 @@ filetype off                    " required
 filetype plugin on
 syntax enable
 set mouse=a
+set cc=80,120
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -89,9 +96,6 @@ nmap <leader>t :tabnew<cr>
 nnoremap j gj
 nnoremap k gk
 nnoremap J <Nop>
-
-"Easy escaping to normal model
-imap jj <esc>
 
 " Open splits
 nmap vs :vsplit<cr>
@@ -121,9 +125,11 @@ let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_undercurl = 1
 let g:gruvbox_contrast_dark = "soft"
-set background=light
-colorscheme solarized
-
+set background=dark
+colorscheme gruvbox
+" make transparent window
+hi Normal guibg=NONE ctermbg=NONE
+ 
 " coc completion configuration
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -177,7 +183,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
@@ -201,4 +207,9 @@ let g:onedark_terminal_italics = 1
 nmap <F7> :TagbarToggle<CR>
 
 " automatic resize vertical split when focus
-let &winwidth = &columns * 7 / 10
+" let &winwidth = &columns * 7 / 10
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
