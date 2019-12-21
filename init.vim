@@ -29,6 +29,9 @@ Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'StanAngeloff/php.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'easymotion/vim-easymotion'
+Plug 'honza/vim-snippets'
+
 
 " Laravel related
 Plug 'jwalton512/vim-blade'
@@ -45,6 +48,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'chriskempson/tomorrow-theme'
+Plug 'ayu-theme/ayu-vim' 
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -120,13 +124,17 @@ nmap <C-l> <C-w>l
 
 nmap <C-x> :BD<CR>
 
+set termguicolors     " enable true colors support
+
 " Colorscheme configuration
 let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_undercurl = 1
 let g:gruvbox_contrast_dark = "soft"
-set background=dark
-colorscheme gruvbox
+let ayucolor="mirage"  " for light version of theme
+set background=light
+colorscheme ayu
+
 " make transparent window
 hi Normal guibg=NONE ctermbg=NONE
  
@@ -183,7 +191,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='ayu'
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
@@ -213,3 +221,21 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+
