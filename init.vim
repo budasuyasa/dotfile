@@ -17,13 +17,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
-Plug 'yggdroot/indentline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-dadbod'
 Plug 'terryma/vim-smooth-scroll'
-
+Plug 'nathanaelkane/vim-indent-guides'
 " Advance IDE
 " Plug 'liuchengxu/vista.vim'
+
 Plug 'dense-analysis/ale'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
@@ -31,7 +31,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
-
+Plug 'kkoomen/vim-doge'
 
 " Laravel related
 Plug 'jwalton512/vim-blade'
@@ -79,22 +79,23 @@ set noswapfile
 set showmode                    " always show what mode we're currently editing in
 set autoindent 					" set auto indent
 set smartindent
+set cursorline
+set mouse=a
 set nocompatible                " be iMproved, required
 filetype off                    " required
 filetype plugin on
 syntax enable
-set mouse=a
 set cc=80,120
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 let g:auto_save = 1  " enable AutoSave on Vim startup
 " Fast saves
-nmap <leader>w :w!<cr>
-nmap <leader>t :tabnew<cr>
+"nmap <leader>w :w!<cr>
+"nmap <leader>t :tabnew<cr>
 
 " Down is really the next line
 nnoremap j gj
@@ -131,12 +132,23 @@ let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_undercurl = 1
 let g:gruvbox_contrast_dark = "soft"
+
+let g:PaperColor_Theme_Options = {	
+			\ 'theme': {
+			\	'default': {
+			\		'transparent_background': 0,
+			\		'allow_bold': 1,
+			\		'allow_italic': 1
+			\	}
+			\ }
+			\}
+
 let ayucolor="mirage"  " for light version of theme
-set background=light
-colorscheme ayu
+set background=dark
+colorscheme PaperColor
 
 " make transparent window
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
  
 " coc completion configuration
 " Remap keys for gotos
@@ -191,7 +203,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " show buffer 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='ayu'
+let g:airline_theme='papercolor'
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
@@ -237,5 +249,13 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+	
+noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :                                            
+							\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+
+"map <Space>w <Plug>(easymotion-w)
+"map <Space>b <Plug>(easymotion-b)
+
+let g:indent_guides_enable_on_vim_startup = 1
 
