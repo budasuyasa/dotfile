@@ -115,7 +115,7 @@ map <S-h>  :bprevious<CR>
 " Files Navigation
 map <C-o> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
-map <C-e> :History<CR>
+map <C-e> :Buffers<CR>
 
 " Split Navigation
 nmap <C-h> <C-w>h
