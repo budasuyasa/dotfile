@@ -225,7 +225,16 @@ let g:indentLine_enabled = 1
 let g:onedark_terminal_italics = 1
 
 nmap <F7> :TagbarToggle<CR>
-
+let g:tagbar_type_php  = {
+			\ 'ctagstype' : 'php',
+			\ 'kinds'     : [
+			\ 'i:interfaces',
+			\ 'c:classes',
+			\ 'd:constant definitions',
+			\ 'f:functions',
+			\ 'j:javascript functions:1'
+			\ ]
+			\ }
 " automatic resize vertical split when focus
 " let &winwidth = &columns * 7 / 10
 
