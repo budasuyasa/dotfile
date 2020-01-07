@@ -1,5 +1,5 @@
 # vimrc
-My .vimrc configurations. Mostly use vim for PHP (Laravel) Project. Yeah this more look like an IDE instead of a text editor. Enjoy.
+Various dot file collections for my development environtments.
 
 ## Screenshoot
 ![alt text](https://github.com/budasuyasa/vimrc/blob/master/screenshoot.png "My Vim Screenshoot")
