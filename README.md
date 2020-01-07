@@ -1,5 +1,5 @@
 # vimrc
-Various dot file collections for my development environtments.
+Dot file collections for my development environtment.
 
 ## Screenshoot
 ![alt text](https://github.com/budasuyasa/vimrc/blob/master/screenshoot.png "My Vim Screenshoot")
