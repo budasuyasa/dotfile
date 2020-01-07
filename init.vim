@@ -5,7 +5,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
-Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -18,28 +17,31 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
 Plug 'qpkorr/vim-bufkill'
-Plug 'tpope/vim-dadbod'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'nathanaelkane/vim-indent-guides'
-" Advance IDE
-" Plug 'liuchengxu/vista.vim'
 
+"IDE like features
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'StanAngeloff/php.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'kkoomen/vim-doge'
 
-" Laravel related
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Dart and Flutter
+Plug 'dart-lang/dart-vim-plugin'
+
+" Laravel Projects
 Plug 'jwalton512/vim-blade'
 Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-laravel'
 
-" Colorscheme 
-"Plug 'sheerun/vim-polyglot' " must enable
+" Colorscheme Collections
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
@@ -48,26 +50,20 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'chriskempson/tomorrow-theme'
-Plug 'ayu-theme/ayu-vim' 
-
-" Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" Deprecated
-"Plug 'mhinz/vim-startify'
-"Plug 'yuttie/comfortable-motion.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'kaicataldo/material.vim'
 
 call plug#end()
 
 " Basic configuration
 set encoding=utf-8
-set hidden						" set hidden buffer
-set number						" show line number
-set relativenumber				" show relative number
-set linespace=12				" set line space
+set hidden
+set number
+set relativenumber
+set linespace=12
 set title
-set tabstop=4					" set tabstop 4 space
-set shiftwidth=4  				" set shift width
+set tabstop=4
+set shiftwidth=4
 set nobackup
 set ignorecase
 set smartcase
@@ -76,26 +72,22 @@ set nowritebackup
 set updatetime=300
 set nobackup
 set noswapfile
-set showmode                    " always show what mode we're currently editing in
-set autoindent 					" set auto indent
+set showmode
+set autoindent
 set smartindent
 set cursorline
 set mouse=a
-set nocompatible                " be iMproved, required
-filetype off                    " required
+set nocompatible
 filetype plugin on
-syntax enable
+syntax on
 set cc=80,120
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
+" use space as leader
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
-let g:auto_save = 1  " enable AutoSave on Vim startup
-" Fast saves
-"nmap <leader>w :w!<cr>
-"nmap <leader>t :tabnew<cr>
+" enable AutoSave on Vim startup
+let g:auto_save = 1  
 
 " Down is really the next line
 nnoremap j gj
@@ -106,14 +98,14 @@ nnoremap J <Nop>
 nmap vs :vsplit<cr>
 nmap sp :split<cr>
 
-" Tab switcher NerdTree
+" Buffer switcher using NerdTree
 map <S-Right> :bnext<CR>
 map <S-Left>  :bprevious<CR>
 map <S-l> :bnext<CR>
 map <S-h>  :bprevious<CR>
-
-" Files Navigation
 map <C-o> :NERDTreeToggle<CR>
+
+" Files Navigation using fzf
 map <C-p> :Files<CR>
 map <C-e> :Buffers<CR>
 
@@ -123,7 +115,11 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" Quick close buffers
 nmap <C-x> :BD<CR>
+
+" Quick remove search highlight
+nnoremap ss :noh<CR>
 
 set termguicolors     " enable true colors support
 
@@ -145,12 +141,18 @@ let g:PaperColor_Theme_Options = {
 
 let ayucolor="mirage"  " for light version of theme
 set background=dark
-colorscheme PaperColor
 
+" material themes
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'palenight'
+
+set t_Co=256
+colorscheme dracula
+ 
 " make transparent window
 "hi Normal guibg=NONE ctermbg=NONE
- 
-" coc completion configuration
+
+" COC behaviour configurations
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -194,6 +196,7 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Filetype maping
 let g:coc_filetype_map = {
   \ 'blade': 'html',
   \ }
@@ -201,29 +204,16 @@ let g:coc_filetype_map = {
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" show buffer 
+" Vim airline custom themes
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='papercolor'
+"let g:airline_theme='dracula'
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
 " Make it so that a curly brace automatically inserts an indented line
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 
-" Vim One themes
-" let g:airline_theme='one'
-" let g:one_allow_italics = 1 " I love italic for comments
-
-" Deprecated
-"let g:comfortable_motion_scroll_down_key = "j"
-"let g:comfortable_motion_scroll_up_key = "k"
-
-" Indentline
-let g:indentLine_enabled = 1
-
-" One dark themes settings
-let g:onedark_terminal_italics = 1
-
+" Minimal tagbar item list
 nmap <F7> :TagbarToggle<CR>
 let g:tagbar_type_php  = {
 			\ 'ctagstype' : 'php',
@@ -235,14 +225,14 @@ let g:tagbar_type_php  = {
 			\ 'j:javascript functions:1'
 			\ ]
 			\ }
-" automatic resize vertical split when focus
+
+" automatic resize vertical split when focus (like VSCode)
 " let &winwidth = &columns * 7 / 10
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -262,9 +252,4 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :                                            
 							\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-
-"map <Space>w <Plug>(easymotion-w)
-"map <Space>b <Plug>(easymotion-b)
-
 let g:indent_guides_enable_on_vim_startup = 1
-
