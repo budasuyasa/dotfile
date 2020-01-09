@@ -1,0 +1,73 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.fontSize": 13,
+    "editor.rulers": [
+        80,
+        100
+    ],
+    "workbench.colorTheme": "Ayu Mirage",
+    "editor.fontWeight": "500",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "auto-close-tag.SublimeText3Mode": true,
+    "auto-close-tag.fullMode": true,
+    "editor.lineHeight": 22,
+    "workbench.tree.indent": 25,
+    "terminal.integrated.fontWeight": "500",
+    "terminal.integrated.fontSize": 13,
+    "workbench.iconTheme": "ayu",
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Cascadia Code','Fira Code Medium','Droid Sans Mono', 'Droid Sans Fallback'",
+    "window.titleBarStyle": "custom",
+    "keyboard.dispatch": "keyCode",
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "d",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+    },
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "/home/asha/.vsvimrc",
+    "vim.easymotionMarkerFontFamily": "Fira Code",
+    "vim.easymotionMarkerFontSize": "12",
+    "vim.easymotionMarkerHeight": 18,
+    "editor.lineNumbers": "relative"
+}
