@@ -19,6 +19,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'bkad/camelcasemotion'
+
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -206,7 +208,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Vim airline custom themes
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='dracula'
+"let g:airline_theme='gruvbox'
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
@@ -253,3 +255,20 @@ noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
 							\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 let g:indent_guides_enable_on_vim_startup = 1
+
+let g:camelcasemotion_key = '<leader>'
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
