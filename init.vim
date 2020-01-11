@@ -233,8 +233,8 @@ let g:tagbar_type_php  = {
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -256,19 +256,8 @@ noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
 
 let g:indent_guides_enable_on_vim_startup = 1
 
+set iskeyword-=_
 let g:camelcasemotion_key = '<leader>'
-map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
 
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
+
