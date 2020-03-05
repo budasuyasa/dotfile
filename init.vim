@@ -3,6 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Essential
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -20,11 +21,12 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'bkad/camelcasemotion'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
-Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'StanAngeloff/php.vim'
 Plug 'easymotion/vim-easymotion'
@@ -42,6 +44,9 @@ Plug 'jwalton512/vim-blade'
 Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-laravel'
 
+"Twig Template
+Plug 'evidens/vim-twig'
+
 " Colorscheme Collections
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
@@ -54,6 +59,8 @@ Plug 'chriskempson/tomorrow-theme'
 Plug 'ayu-theme/ayu-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'lifepillar/vim-solarized8'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
 
@@ -150,7 +157,7 @@ let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight'
 
 set t_Co=256
-colorscheme nord
+colorscheme gruvbox
 
  
 " make transparent window
@@ -182,9 +189,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -216,19 +220,6 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
 " Make it so that a curly brace automatically inserts an indented line
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
-
-" Minimal tagbar item list
-nmap <F7> :TagbarToggle<CR>
-let g:tagbar_type_php  = {
-			\ 'ctagstype' : 'php',
-			\ 'kinds'     : [
-			\ 'i:interfaces',
-			\ 'c:classes',
-			\ 'd:constant definitions',
-			\ 'f:functions',
-			\ 'j:javascript functions:1'
-			\ ]
-			\ }
 
 " automatic resize vertical split when focus (like VSCode)
 " let &winwidth = &columns * 7 / 10
@@ -295,3 +286,10 @@ map <C-e> :Buffers<CR>
 map <C-t> :BTags<CR>
 map <C-f> :Rg<CR>
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+let g:lens#width_resize_min = 80
+let g:lens#animate = 0
