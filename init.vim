@@ -8,6 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'coreyja/fzf.devicon.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug '907th/vim-auto-save'
@@ -21,12 +22,10 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'bkad/camelcasemotion'
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
+Plug 'liuchengxu/vista.vim'
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'StanAngeloff/php.vim'
 Plug 'easymotion/vim-easymotion'
@@ -42,10 +41,6 @@ Plug 'dart-lang/dart-vim-plugin'
 " Laravel Projects
 Plug 'jwalton512/vim-blade'
 Plug 'tpope/vim-projectionist'
-Plug 'noahfrederick/vim-laravel'
-
-"Twig Template
-Plug 'evidens/vim-twig'
 
 " Colorscheme Collections
 Plug 'joshdick/onedark.vim'
@@ -59,8 +54,6 @@ Plug 'chriskempson/tomorrow-theme'
 Plug 'ayu-theme/ayu-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'lifepillar/vim-solarized8'
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
 
@@ -90,6 +83,8 @@ set nocompatible
 filetype plugin on
 syntax on
 set cc=80,120
+
+set tags+=tags;$HOME
 
 " use space as leader
 let mapleader = "\<Space>"
@@ -161,7 +156,7 @@ colorscheme gruvbox
 
  
 " make transparent window
-"hi Normal guibg=NONE ctermbg=NONE
+ "hi Normal guibg=NONE ctermbg=NONE
 
 " COC behaviour configurations
 " Remap keys for gotos
@@ -182,13 +177,16 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> pumvisible) ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -213,13 +211,30 @@ let g:coc_filetype_map = {
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Vim airline custom themes
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='nord'
+let g:airline_theme='gruvbox'
+let g:airline#extensions#coc#enabled = 1
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
 
 " Make it so that a curly brace automatically inserts an indented line
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
+
+" Minimal tagbar item list
+nmap <F7> :TagbarToggle<CR>
+let g:tagbar_type_php  = {
+			\ 'ctagstype' : 'php',
+			\ 'kinds'     : [
+			\ 'i:interfaces',
+			\ 'c:classes',
+			\ 'd:constant definitions',
+			\ 'f:functions',
+			\ 'j:javascript functions:1'
+			\ ]
+			\ }
 
 " automatic resize vertical split when focus (like VSCode)
 " let &winwidth = &columns * 7 / 10
@@ -247,49 +262,78 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 noremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :                                            
 							\"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_enable_on_vim_startup = 0
 
 let g:camelcasemotion_key = '<leader>'
 map <silent> b <Plug>CamelCaseMotion_b
 
 "Fzf Config
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o -path 'vendor/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-let $FZF_DEFAULT_OPTS='--layout=reverse --margin=1,0'
 
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
- 
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
- 
-  let height = float2nr(10)
-  let width = float2nr(80)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = 1
- 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
- 
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o -path 'vendor/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+
+let g:fzf_preview_window = 'right:60%'
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 
 " Files Navigation using fzf
-map <C-p> :Files<CR>
+map <C-p> :FilesWithDevicons<CR>
 map <C-e> :Buffers<CR>
 map <C-t> :BTags<CR>
-map <C-f> :Rg<CR>
+map <C-f> :RgWithDevicons<CR>
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" Config for vue language serve
+let g:LanguageClient_serverCommands = {
+    \ 'vue': ['vls']
+    \ }
 
-let g:lens#width_resize_min = 80
-let g:lens#animate = 0
+" How each level is indented and what to prepend.
+" This could make the display more compact or more spacious.
+" e.g., more compact: ["▸ ", ""]
+" Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Executive used when opening vista sidebar without specifying it.
+" See all the avaliable executives via `:echo g:vista#executives`.
+let g:vista_default_executive = 'coc'
+
+" Set the executive for some filetypes explicitly. Use the explicit executive
+" instead of the default one for these filetypes when using `:Vista` without
+" specifying the executive.
+let g:vista_executive_for = {
+  \ 'cpp': 'coc',
+  \ 'php': 'coc',
+  \ }
+
+" Declare the command including the executable and options used to generate ctags output
+" for some certain filetypes.The file path will be appened to your custom command.
+" For example:
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
+
+" To enable fzf's preview window set g:vista_fzf_preview.
+" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+" For example:
+let g:vista_fzf_preview = ['right:50%']
+
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
+let g:vista_ignore_kinds = ['variables']
+
+let g:vista_fzf_preview = ['right:50%']
+
