@@ -18,11 +18,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdcommenter'
-Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'bkad/camelcasemotion'
 Plug 'liuchengxu/vista.vim'
+Plug 'yuki-ycino/fzf-preview.vim'
+Plug 'simeji/winresizer'
+Plug 'TaDaa/vimade'
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -49,11 +51,11 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
-Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'chriskempson/tomorrow-theme'
 Plug 'ayu-theme/ayu-vim'
 Plug 'kaicataldo/material.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
@@ -87,8 +89,8 @@ set cc=80,120
 set tags+=tags;$HOME
 
 " use space as leader
-let mapleader = "\<Space>"
-let g:mapleader = "\<Space>"
+let mapleader = ";"
+let g:mapleader = ";"
 
 " enable AutoSave on Vim startup
 let g:auto_save = 1  
@@ -109,6 +111,8 @@ map <S-l> :bnext<CR>
 map <S-h>  :bprevious<CR>
 map <C-o> :NERDTreeToggle<CR>
 
+let g:winresizer_enable=1
+let g:winresizer_start_key = '<C-w>r'
 
 " Split Navigation
 nmap <C-h> <C-w>h
@@ -117,10 +121,11 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " Quick close buffers
-nmap <C-x> :BD<CR>
+nmap <C-x> :bd<CR>
 
 " Quick remove search highlight
 nnoremap ss :noh<CR>
+
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -152,7 +157,7 @@ let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight'
 
 set t_Co=256
-colorscheme gruvbox
+colorscheme dracula
 
  
 " make transparent window
@@ -215,7 +220,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='gruvbox'
+"let g:airline_theme='gruvbox'
 let g:airline#extensions#coc#enabled = 1
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
@@ -272,22 +277,22 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o -path 'vendor/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
-let g:fzf_preview_window = 'right:60%'
+"let g:fzf_preview_window = 'right:60%'
 
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+"command! -bang -nargs=? -complete=dir Files
+    "\ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+"command! -bang -nargs=* Rg
+  "\ call fzf#vim#grep(
+  "\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  "\   fzf#vim#with_preview(), <bang>0)
 
 
 " Files Navigation using fzf
-map <C-p> :FilesWithDevicons<CR>
-map <C-e> :Buffers<CR>
-map <C-t> :BTags<CR>
-map <C-f> :RgWithDevicons<CR>
+map <C-p> :FzfPreviewProjectFiles<CR>
+map <C-e> :FzfPreviewAllBuffers<CR>
+map <C-t> :Vista finder fzf:coc<CR>
+map <C-f> :RgWithDevicons<CR> 
 
 " Config for vue language serve
 let g:LanguageClient_serverCommands = {
@@ -333,7 +338,14 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
-let g:vista_ignore_kinds = ['variables']
-
+let g:vista_ignore_kinds = ['Variable']
 let g:vista_fzf_preview = ['right:50%']
+let g:fzf_preview_use_dev_icons = 1
 
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
