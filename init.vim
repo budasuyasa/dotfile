@@ -25,6 +25,8 @@ Plug 'liuchengxu/vista.vim'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'simeji/winresizer'
 Plug 'TaDaa/vimade'
+Plug 'moll/vim-bbye'
+Plug 'junegunn/vim-emoji'
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -121,7 +123,7 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " Quick close buffers
-nmap <C-x> :bd<CR>
+nmap <C-x> :Bdelete<CR>
 
 " Quick remove search highlight
 nnoremap ss :noh<CR>
@@ -349,3 +351,11 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
+
+
+let g:gitgutter_sign_added ="🌈"
+let g:gitgutter_sign_modified = "🔁" 
+let g:gitgutter_sign_removed = "🚩"
+let g:gitgutter_sign_modified_removed = "❌"
+let g:coc_status_error_sign = "😠"
+
