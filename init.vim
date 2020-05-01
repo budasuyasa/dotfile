@@ -27,6 +27,9 @@ Plug 'simeji/winresizer'
 Plug 'TaDaa/vimade'
 Plug 'moll/vim-bbye'
 Plug 'junegunn/vim-emoji'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'evidens/vim-twig'
+Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 "IDE like features
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -159,7 +162,7 @@ let g:material_terminal_italics = 1
 let g:material_theme_style = 'palenight'
 
 set t_Co=256
-colorscheme dracula
+colorscheme material
 
  
 " make transparent window
