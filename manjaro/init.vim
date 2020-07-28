@@ -1,37 +1,100 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGIN MANAGER AND PLUGIN INSTALLATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/nvim/plugged')
+
+" ////////////////////////////////////////////////////////////////////////////
+" Buffers and Search
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'moll/vim-bbye'
+
+
+" ////////////////////////////////////////////////////////////////////////////
+" Text Manipulation
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug '907th/vim-auto-save'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'simeji/winresizer'
-Plug 'moll/vim-bbye'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'StanAngeloff/php.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'honza/vim-snippets'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Documnentation and Writing
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'kkoomen/vim-doge'
-Plug 'jwalton512/vim-blade'
-Plug 'tpope/vim-projectionist'
-Plug 'voldikss/vim-floaterm'
-Plug 'liuchengxu/vista.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'mzlogin/vim-markdown-toc'
-Plug 'gruvbox-community/gruvbox'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Status Bar and Helpers
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 
+" ////////////////////////////////////////////////////////////////////////////
+" Auto Completion and Navigation
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liuchengxu/vista.vim'
+
+
+
+" ////////////////////////////////////////////////////////////////////////////
+" PHP and Laravel
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'StanAngeloff/php.vim'
+Plug 'jwalton512/vim-blade'
+Plug 'tpope/vim-projectionist'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Color Scheme
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'gruvbox-community/gruvbox'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Visual Helpers & Magic
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'junegunn/vim-peekaboo'
+Plug 'simeji/winresizer'
+Plug 'airblade/vim-gitgutter'
+Plug 'honza/vim-snippets'
+Plug 'voldikss/vim-floaterm'
+Plug 'luochen1990/rainbow'
 
 call plug#end()
 
-" Basic configuration
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LIST OF COC EXTENSIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc-docker
+" coc-css
+" coc-snippets
+" coc-explorer
+" coc-html
+" coc-json
+" coc-markdonwlint
+" coc-phpls
+" coc-tsserver
+" coc-yaml
+" coc-yank
+" coc-vetur
+" coc-highlight
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC CONFIGURATION
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set hidden
 set number
@@ -60,32 +123,41 @@ filetype plugin on
 syntax on
 set cc=80,120
 
-" use space as leader
+" USE SPACE AS LEADER
 let mapleader = ";"
 let g:mapleader = ";"
 
-" enable AutoSave on Vim startup
+" ENABLE AUTOSAVE ON VIM STARTUP
 let g:auto_save = 1  
 
-" Down is really the next line
+" DOWN IS REALLY THE NEXT LINE
 nnoremap j gj
 nnoremap k gk
 nnoremap J <Nop>
 
-" Open splits
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SPLIT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" OPEN SPLITS
 nmap vs :vsplit<cr>
 nmap sp :split<cr>
 
+" RESIZE SPLIT
 let g:winresizer_enable=1
 let g:winresizer_start_key = '<C-w>r'
 
-" Split Navigation
+" QUICK MOVE SPLIT NAVIGATION
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Buffer switcher using NerdTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFERS 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" BUFFERS NAVIGATIONS
 map <S-Right> :bnext<CR>
 map <S-Left>  :bprevious<CR>
 map <S-l> :bnext<CR>
@@ -95,16 +167,18 @@ map <C-o> :CocCommand explorer<CR>
 " Quick close buffers
 nmap <C-x> :Bdelete<CR>
 
-inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
-
-" Quick remove search highlight
-nnoremap ss :noh<CR>
-
+" QUICK JUMP BUFFERS USING NUMBER
+nmap <leader>b :b 
+"
 " Filetype maping
 let g:coc_filetype_map = {
   \ 'blade': 'html',
   \ }
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TERRMINAL & COLOR SCHEME
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors     " enable true colors support
@@ -112,11 +186,17 @@ set termguicolors     " enable true colors support
 set t_Co=256
 colorscheme gruvbox	
 
-" Files Navigation using fzf
-map <C-p> :GFiles<CR>
-map <leader>o :Buffers<CR>
-map <C-t> :Vista finder fzf:coc<CR>
-map <C-f> :Rg<CR>
+"Gruvbox settings
+let g:gruvbox_contrast_dark='hard'
+
+"config bufferline integration with airline
+let g:airline#extensions#bufferline#enabled = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VISUAL HELPERS & MAGIC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rainbow_active = 1
 
 "Set no line toggle
 function Noline()
@@ -126,6 +206,22 @@ endfunction
 
 nmap <leader>nl :call Noline()<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SEARCH AND QUICK JUMP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Quick remove search highlight
+nnoremap ss :noh<CR>
+" Files Navigation using fzf
+map <C-p> :GFiles<CR>
+map <leader>o :Buffers<CR>
+map <C-t> :Vista finder fzf:coc<CR>
+map <C-f> :Rg<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EXTERNAL PLUGINS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:floaterm_keymap_toggle = '<leader>tt'
 let g:floaterm_keymap_new    = '<leader>tc'
 let g:floaterm_keymap_prev   = '<leader>tp'
@@ -133,9 +229,21 @@ let g:floaterm_keymap_next   = '<leader>tn'
 let g:floaterm_keymap_hide   = '<leader>th'
 
 map <leader>gg :FloatermNew lazygit<CR>
+map <leader>gd :FloatermNew lazydocker<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GIT & vim-fugitive SHORTCUT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>gs :G<CR>
+nmap <leader>gc :Gcommit -m 
+nmap <leader><S-P> :Gpush<CR>
+nmap <leader>gp :Gpull 
+nmap <leader>gl :Glog<CR> 
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOCOMPLETION, CODE NAVIGATION AND REFACTORING
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 "COC Config
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -278,7 +386,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " Executive used when opening vista sidebar without specifying it.
 " See all the avaliable executives via `:echo g:vista#executives`.
-let g:vista_default_executive = 'ctags'
+let g:vista_default_executive = 'coc'
 
 " Set the executive for some filetypes explicitly. Use the explicit executive
 " instead of the default one for these filetypes when using `:Vista` without
@@ -307,10 +415,4 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
-"Gruvbox settings
-let g:gruvbox_contrast_dark='hard'
 
-"config bufferline integration with airline
-let g:airline#extensions#bufferline#enabled = 0
-
-nmap <leader>b :b 
