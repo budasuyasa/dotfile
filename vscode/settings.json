@@ -62,7 +62,7 @@
     "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-a>": false,
-        "<C-f>": false,
+        "<C-f>": false
     },
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "/home/asha/.vsvimrc",
