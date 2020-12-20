@@ -243,7 +243,7 @@ map <leader>gd :FloatermNew lazydocker<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GIT & vim-fugitive SHORTCUT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>gs :FzfPreviewGitAction<CR>
+nmap <leader>gs :FloatermNew lazygit<CR>
 nmap <leader>gc :Gcommit -m 
 nmap <leader><S-P> :Gpush<CR>
 nmap <leader>gp :Gpull 
