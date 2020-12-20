@@ -27,7 +27,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
-Plug 'prettier/vim-prettier'
 
 " ////////////////////////////////////////////////////////////////////////////
 " Documnentation and Writing
@@ -41,22 +40,13 @@ Plug 'mzlogin/vim-markdown-toc'
 " ////////////////////////////////////////////////////////////////////////////
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'bling/vim-bufferline'
 Plug 'ryanoasis/vim-devicons'
-"Plug 'pacha/vem-tabline'
 
 " ////////////////////////////////////////////////////////////////////////////
 " Auto Completion and Navigation
 " ////////////////////////////////////////////////////////////////////////////
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/vista.vim'
-
-" ////////////////////////////////////////////////////////////////////////////
-" Golang Plugins
-" ////////////////////////////////////////////////////////////////////////////
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-
 
 " ////////////////////////////////////////////////////////////////////////////
 " PHP and Laravel
@@ -76,6 +66,7 @@ Plug 'hardcoreplayers/oceanic-material'
 Plug 'sainnhe/sonokai'
 Plug 'yggdroot/indentline'
 Plug 'wavded/vim-stylus'
+Plug 'pineapplegiant/spaceduck'
 
 
 " ////////////////////////////////////////////////////////////////////////////
@@ -201,7 +192,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors     " enable true colors support
 
 set t_Co=256
-colorscheme gruvbox
+colorscheme dracula
 
 "Gruvbox settings
 let g:gruvbox_contrast_dark='hard'
@@ -231,9 +222,9 @@ nmap <leader>nl :call Noline()<CR>
 " Quick remove search highlight
 nnoremap ss :noh<CR>
 " Files Navigation using fzf
-map <C-p> :GFiles<CR>
-map <leader>o :Buffers<CR>
-map <C-t> :Vista finder fzf:coc<CR>
+map <C-p> :FzfPreviewGitFiles<CR>
+map <leader>o :FzfPreviewAllBuffers<CR>
+map <leader>m :Vista finder fzf:coc<CR>
 map <C-f> :Rg<CR>
 
 
