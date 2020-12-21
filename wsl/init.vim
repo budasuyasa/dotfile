@@ -16,6 +16,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins'  }
 Plug 'moll/vim-bbye'
+Plug 'psliwka/vim-smoothie'
 
 
 " ////////////////////////////////////////////////////////////////////////////
@@ -58,7 +59,6 @@ Plug 'jwalton512/vim-blade'
 " ////////////////////////////////////////////////////////////////////////////
 " Color Scheme
 " ////////////////////////////////////////////////////////////////////////////
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'gruvbox-community/gruvbox'
 Plug 'hardcoreplayers/oceanic-material'
