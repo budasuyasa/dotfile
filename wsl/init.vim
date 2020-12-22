@@ -192,7 +192,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors     " enable true colors support
 
 set t_Co=256
-colorscheme dracula
+colorscheme sonokai
 
 "Gruvbox settings
 let g:gruvbox_contrast_dark='hard'
@@ -432,3 +432,8 @@ nmap <leader>p <Plug>vem_prev_buffer-
 nmap <leader>n <Plug>vem_next_buffer-
 
 let g:fzf_preview_use_dev_icons = 1
+
+let g:floaterm_wintype = "normal"
+let g:floaterm_width = 1.0
+let g:floaterm_height = 0.6
+let g:floaterm_autoclose = 1
