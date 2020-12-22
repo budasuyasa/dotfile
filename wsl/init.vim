@@ -435,5 +435,6 @@ let g:fzf_preview_use_dev_icons = 1
 
 let g:floaterm_wintype = "normal"
 let g:floaterm_width = 1.0
-let g:floaterm_height = 0.6
+let g:floaterm_height = 0.4
 let g:floaterm_autoclose = 1
+
