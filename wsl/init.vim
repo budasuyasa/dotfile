@@ -17,6 +17,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins'  }
 Plug 'moll/vim-bbye'
 Plug 'psliwka/vim-smoothie'
+Plug 'junegunn/goyo.vim'
 
 
 " ////////////////////////////////////////////////////////////////////////////
@@ -67,6 +68,8 @@ Plug 'sainnhe/sonokai'
 Plug 'yggdroot/indentline'
 Plug 'wavded/vim-stylus'
 Plug 'pineapplegiant/spaceduck'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 
 " ////////////////////////////////////////////////////////////////////////////
@@ -192,14 +195,28 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors     " enable true colors support
 
 set t_Co=256
-colorscheme sonokai
+set background=light
+colorscheme onehalfdark
 
 "Gruvbox settings
-let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_italic=1
+let g:gruvbox_sign_column='bg1'
 
 "config bufferline integration with airline
+let g:airline_theme='onehalfdark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 0
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -222,7 +239,7 @@ nmap <leader>nl :call Noline()<CR>
 " Quick remove search highlight
 nnoremap ss :noh<CR>
 " Files Navigation using fzf
-map <C-p> :FzfPreviewGitFiles<CR>
+map <C-p> :FzfPreviewProjectFiles<CR>
 map <leader>o :FzfPreviewAllBuffers<CR>
 map <leader>m :Vista finder fzf:coc<CR>
 map <C-f> :Rg<CR>
