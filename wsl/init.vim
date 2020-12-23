@@ -18,6 +18,7 @@ Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePl
 Plug 'moll/vim-bbye'
 Plug 'psliwka/vim-smoothie'
 Plug 'junegunn/goyo.vim'
+Plug 'preservim/nerdcommenter'
 
 
 " ////////////////////////////////////////////////////////////////////////////
@@ -180,6 +181,7 @@ nmap <C-x> :Bdelete<CR>
 
 " QUICK JUMP BUFFERS USING NUMBER
 nmap <leader>b :b 
+nmap <leader>qq :q<CR> 
 "
 " Filetype maping
 let g:coc_filetype_map = {
@@ -454,4 +456,3 @@ let g:floaterm_wintype = "normal"
 let g:floaterm_width = 1.0
 let g:floaterm_height = 0.4
 let g:floaterm_autoclose = 1
-
