@@ -1,71 +1,101 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGIN MANAGER AND PLUGIN INSTALLATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
-" Essential
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-obsession'
-Plug 'scrooloose/nerdtree'
-Plug 'airblade/vim-gitgutter'
+" ////////////////////////////////////////////////////////////////////////////
+" Buffers and Search
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'coreyja/fzf.devicon.vim'
-"Plug 'jiangmiao/auto-pairs'
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins'  }
+Plug 'moll/vim-bbye'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Text Manipulation
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug '907th/vim-auto-save'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdcommenter'
-Plug 'terryma/vim-smooth-scroll'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'bkad/camelcasemotion'
-Plug 'liuchengxu/vista.vim'
-Plug 'yuki-ycino/fzf-preview.vim'
-Plug 'simeji/winresizer'
-Plug 'TaDaa/vimade'
-Plug 'moll/vim-bbye'
-Plug 'junegunn/vim-emoji'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'evidens/vim-twig'
-Plug 'captbaritone/better-indent-support-for-php-with-html'
-Plug 'nikvdp/ejs-syntax'
-
-
-"IDE like features
-Plug 'StanAngeloff/php.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'honza/vim-snippets'
+
+" ////////////////////////////////////////////////////////////////////////////
+" Documnentation and Writing
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'kkoomen/vim-doge'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'preservim/nerdcommenter'
 
-" Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" ////////////////////////////////////////////////////////////////////////////
+" Status Bar and Helpers
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 
-" Dart and Flutter
-Plug 'dart-lang/dart-vim-plugin'
-
-" Laravel Projects
+" ////////////////////////////////////////////////////////////////////////////
+" Intellisense, auto completion, languages and syntax support
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liuchengxu/vista.vim'
+Plug 'wavded/vim-stylus'
 Plug 'jwalton512/vim-blade'
-Plug 'tpope/vim-projectionist'
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LIST OF COC EXTENSIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc-docker
+" coc-css
+" coc-snippets
+" coc-explorer
+" coc-html
+" coc-json
+" coc-markdonwlint
+" coc-phpls
+" coc-tsserver
+" coc-yaml
+" coc-yank
+" coc-vetur
+" coc-highlight
 
-" Colorscheme Collections
-Plug 'joshdick/onedark.vim'
-Plug 'rakr/vim-one'
-Plug 'arcticicestudio/nord-vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
-Plug 'chriskempson/tomorrow-theme'
-Plug 'ayu-theme/ayu-vim'
-Plug 'kaicataldo/material.vim'
-Plug 'lifepillar/vim-solarized8'
+" ////////////////////////////////////////////////////////////////////////////
+" Color Scheme
+" ////////////////////////////////////////////////////////////////////////////
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'gruvbox-community/gruvbox'
+Plug 'hardcoreplayers/oceanic-material'
+Plug 'sainnhe/sonokai'
+Plug 'yggdroot/indentline'
+Plug 'pineapplegiant/spaceduck'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'ayu-theme/ayu-vim' " or other package manager
+
+" ////////////////////////////////////////////////////////////////////////////
+" Visual Helpers & Magic
+" ////////////////////////////////////////////////////////////////////////////
+Plug 'junegunn/vim-peekaboo'
+Plug 'simeji/winresizer'
+Plug 'airblade/vim-gitgutter'
+Plug 'honza/vim-snippets'
+Plug 'voldikss/vim-floaterm'
+Plug 'psliwka/vim-smoothie'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
-" Basic configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC CONFIGURATION
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set hidden
 set number
@@ -90,156 +120,171 @@ set mouse=a
 set nocompatible
 set shortmess+=c
 set signcolumn=yes
+set redrawtime=100000
 filetype plugin on
 syntax on
 set cc=80,120
 
-set tags+=tags;$HOME
-
-" use space as leader
+" USE SPACE AS LEADER
 let mapleader = ";"
 let g:mapleader = ";"
 
-" enable AutoSave on Vim startup
-let g:auto_save = 1  
+" ENABLE AUTOSAVE ON VIM STARTUP
+let g:auto_save = 0
 
-" Down is really the next line
+" DOWN IS REALLY THE NEXT LINE
 nnoremap j gj
 nnoremap k gk
 nnoremap J <Nop>
 
-" Open splits
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SPLIT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" OPEN SPLITS
 nmap vs :vsplit<cr>
 nmap sp :split<cr>
 
-" Buffer switcher using NerdTree
-map <S-Right> :bnext<CR>
-map <S-Left>  :bprevious<CR>
-map <S-l> :bnext<CR>
-map <S-h>  :bprevious<CR>
-map <C-o> :NERDTreeToggle<CR>
-
+" RESIZE SPLIT
 let g:winresizer_enable=1
 let g:winresizer_start_key = '<C-w>r'
 
-" Split Navigation
+" QUICK MOVE SPLIT NAVIGATION
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFERS 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" BUFFERS NAVIGATIONS
+map <S-Right> :bnext<CR>
+map <S-Left>  :bprevious<CR>
+map <S-l> :bnext<CR>
+map <S-h>  :bprevious<CR>
+map <C-o> :CocCommand explorer<CR>
+
 " Quick close buffers
 nmap <C-x> :Bdelete<CR>
 
-" Quick remove search highlight
-nnoremap ss :noh<CR>
-
-
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-set termguicolors     " enable true colors support
-
-
-" Colorscheme configuration
-let g:gruvbox_italic = 1
-let g:gruvbox_underline = 1
-let g:gruvbox_undercurl = 1
-let g:gruvbox_contrast_dark = "soft"
-
-let g:PaperColor_Theme_Options = {	
-			\ 'theme': {
-			\	'default': {
-			\		'transparent_background': 0,
-			\		'allow_bold': 1,
-			\		'allow_italic': 1
-			\	}
-			\ }
-			\}
-
-let ayucolor="mirage"  " for light version of theme
-set background=dark
-
-" material themes
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'palenight'
-
-set t_Co=256
-colorscheme gruvbox
-
- 
-" make transparent window
- "hi Normal guibg=NONE ctermbg=NONE
-
-
+" QUICK JUMP BUFFERS USING NUMBER
+nmap <leader>b :b 
+nmap <leader>qq :q<CR> 
+"
 " Filetype maping
 let g:coc_filetype_map = {
   \ 'blade': 'html',
   \ }
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
 
-" Vim airline custom themes
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#buffer_nr_show = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Theming
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors     " enable true colors support
+
+set t_Co=256
+set background=light
+
+" for mirage version of theme
+let ayucolor="mirage" 
+
+"Gruvbox settings
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_italic=1
+let g:gruvbox_sign_column='bg1'
+
+colorscheme ayu
+
+"config bufferline integration with airline
+let g:airline_theme='onehalfdark'
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='gruvbox'
-let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#bufferline#enabled = 0
 
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php,*.blade.php'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 
-" Make it so that a curly brace automatically inserts an indented line
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VISUAL HELPERS & MAGIC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rainbow_active = 1
+
+"Set no line toggle
+function Noline()
+	execute "set number!"
+	execute "set relativenumber!"
+endfunction
+
+nmap <leader>nl :call Noline()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fzf configs
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Quick remove search highlight
+nnoremap ss :noh<CR>
+" Files Navigation using fzf
+map <C-p> :FzfPreviewProjectFiles<CR>
+map <leader>o :FzfPreviewAllBuffers<CR>
+map <leader>m :Vista finder fzf:coc<CR>
+map <C-f> :Rg<CR>
+
+let g:fzf_preview_use_dev_icons = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Floaterm Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:floaterm_keymap_toggle = '<leader>tt'
+let g:floaterm_keymap_new    = '<leader>tc'
+let g:floaterm_keymap_prev   = '<leader>tp'
+let g:floaterm_keymap_next   = '<leader>tn'
+let g:floaterm_keymap_hide   = '<leader>th'
+
+map <leader>gg :FloatermNew lazygit<CR>
+map <leader>gd :FloatermNew lazydocker<CR>
+
+let g:floaterm_wintype = "normal"
+let g:floaterm_width = 1.0
+let g:floaterm_height = 0.4
+let g:floaterm_autoclose = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GIT & vim-fugitive SHORTCUT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>gs :FloatermNew lazygit<CR>
+nmap <leader>gc :Gcommit -m 
+nmap <leader><S-P> :Gpush<CR>
+nmap <leader>gp :Gpull 
+nmap <leader>gl :Glog<CR> 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COC Configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
-
-" Minimal tagbar item list
-nmap <F7> :TagbarToggle<CR>
-let g:tagbar_type_php  = {
-			\ 'ctagstype' : 'php',
-			\ 'kinds'     : [
-			\ 'i:interfaces',
-			\ 'c:classes',
-			\ 'd:constant definitions',
-			\ 'f:functions',
-			\ 'j:javascript functions:1'
-			\ ]
-			\ }
-
-" automatic resize vertical split when focus (like VSCode)
-" let &winwidth = &columns * 7 / 10
-
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-
+"COC Config
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
-
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
-
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
-
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<c-k>'
-
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-	
 noremap <silent><expr> <cr> pumvisible() ? coc#_coc#on_enter()\<CR>"
-
-let g:indent_guides_enable_on_vim_startup = 0
-
-let g:camelcasemotion_key = '<leader>'
-map <silent> b <Plug>CamelCaseMotion_b
-
-"Fzf Config
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o -path 'vendor/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -361,28 +406,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-"let g:fzf_preview_window = 'right:60%'
-
-"command! -bang -nargs=? -complete=dir Files
-    "\ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
-
-"command! -bang -nargs=* Rg
-  "\ call fzf#vim#grep(
-  "\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  "\   fzf#vim#with_preview(), <bang>0)
-
-
-" Files Navigation using fzf
-map <C-p> :FzfPreviewProjectFiles<CR>
-map <C-e> :FzfPreviewAllBuffers<CR>
-map <C-t> :Vista finder fzf:coc<CR>
-map <C-f> :RgWithDevicons<CR> 
-
-" Config for vue language serve
-let g:LanguageClient_serverCommands = {
-    \ 'vue': ['vls']
-    \ }
-
+" Vista Vim Config
 " How each level is indented and what to prepend.
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
@@ -397,7 +421,6 @@ let g:vista_default_executive = 'coc'
 " instead of the default one for these filetypes when using `:Vista` without
 " specifying the executive.
 let g:vista_executive_for = {
-  \ 'cpp': 'coc',
   \ 'php': 'coc',
   \ }
 
@@ -412,7 +435,6 @@ let g:vista_ctags_cmd = {
 " The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
 " For example:
 let g:vista_fzf_preview = ['right:50%']
-
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
 let g:vista#renderer#enable_icon = 1
 
@@ -422,30 +444,18 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
-let g:vista_ignore_kinds = ['Variable']
-let g:vista_fzf_preview = ['right:50%']
-let g:fzf_preview_use_dev_icons = 1
 
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--info=inline', '--preview', '~/.config/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" IndentLine Configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_enabled = 1
+let g:indentLine_char = '┊'
+let g:indentLine_first_char = '┊'
+let g:indentLine_showFirstIndentLevel = 0
+let g:indentLine_setColors = 0
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-
-let g:gitgutter_sign_added ="🌈"
-let g:gitgutter_sign_modified = "🔁" 
-let g:gitgutter_sign_removed = "🚩"
-let g:gitgutter_sign_modified_removed = "❌"
-let g:coc_status_error_sign = "😠"
-
-
-function Noline()
-	execute "set number!"
-	execute "set relativenumber!"
-endfunction
-
-nmap <leader>nl :call Noline()<CR>
+nmap <leader>h <Plug>vem_move_buffer_left-
+nmap <leader>l <Plug>vem_move_buffer_right-
+nmap <leader>p <Plug>vem_prev_buffer-
+nmap <leader>n <Plug>vem_next_buffer-
 

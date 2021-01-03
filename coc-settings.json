@@ -1,7 +1,0 @@
-{
-
-	"intelephense.completion.maxItems": 25,
-	"diagnostic.errorSign": "😡",
-	"diagnostic.warningSign": "😤",
-	"diagnostic.hintSign": "🙄"
-}
